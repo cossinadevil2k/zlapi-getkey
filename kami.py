@@ -17,18 +17,6 @@ class ZaloAPI:
             'language': language,
             'ts':int(datetime.utcnow().timestamp() * 1000)
         }
-        # if local_ip and screen_size:
-        #     params.update({'localIP': local_ip, 'width': screen_size['width'], 'height': screen_size['height']})
-        # if info:
-        #     params['info'] = json.dumps(info)
-        # if source_install:
-        #     params['source_install'] = source_install
-        # if additional_params:
-        #     params.update(additional_params)
-        # if is_new:
-        #     params['is_new'] = is_new
-
-        # encrypted = await self.encrypt_param(params, imei)
         HEADERS = {
 	"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
 	"Accept": "application/json, text/plain, */*",
@@ -42,10 +30,7 @@ class ZaloAPI:
 	"referer": "https://chat.zalo.me/",
 	"accept-language": "vi-VN,vi;q=0.9,fr-FR;q=0.8,fr;q=0.7,en-US;q=0.6,en;q=0.5",
 }
-#         proxy = {
-#     'http': 'http://admin:admin@15.235.186.150:8080',
-#     'https': 'http://admin:admin@15.235.186.150:8080'
-# }
+
 
         response = requests.get(url, headers=HEADERS,params=params,cookies=cookie).json()
   
@@ -73,6 +58,7 @@ async def main(imei,cokie):
                'error_code':99, 
                 ' error_message' : f"  Số điện Thoại Chưa có Trong list NT cho admin để được thêm zalo: @quangz3 phone you: {phone}",
                  'phone_number':phone
+
            }
        else:
           data = {
@@ -80,7 +66,8 @@ async def main(imei,cokie):
               'data':{
                   'secret_key': zpw_enk,
                   'send2me_id' :semid_2,
-                  'phone_number' :phone
+                  'phone_number' :phone,
+                  "zpw_ws": response['data']['zpw_ws']
    
               }
           }

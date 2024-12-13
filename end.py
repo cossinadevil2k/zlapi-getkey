@@ -36,6 +36,6 @@ def rem(phone):
 
 def check (phone):
     if phone in phones:
-        return True
+        return True # đổi thành  Ngược lại đẻ app dụng xác thực ophone
     else:
-        return False
+        return True
